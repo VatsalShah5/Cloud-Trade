@@ -1,10 +1,9 @@
-from django.contrib.auth import authenticate, login, logout
-from django.db import IntegrityError
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect , HttpResponse
 from django.contrib.auth.models import User
-from django.contrib import messages
+from django.contrib.auth import authenticate,login, logout
+from django.contrib.auth.decorators import login_required
 
-
+@login_required(login_url='signin')
 def home(request):
     return render(request,'home.html')
 
@@ -13,44 +12,35 @@ def index(request):
     return render(request,'index.html')
 
 def signup(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        if User.objects.filter(username=username):
-            messages.error(request, "Username already exist! Please try some other username")
-            return redirect('signup')
-        if not password:
-            messages.error(request, "Password is required.")
-            return redirect('signup')
+    if request.method=='POST':
+        username=request.POST.get('username')
+        email=request.POST.get('email')
+        password=request.POST.get('password')
+        cpassword=request.POST.get('cpassword')
         
-        try:
-            user = User.objects.create_user(username=username, password=password)
-            user.save()
-            messages.success(request, "Your account has been created.")
+        if password != cpassword:
+            return HttpResponse("Your Password Does not match!!!")
+        else:    
+            my_user=User.objects.create_user(username, email, password)
+            my_user.save()
             return redirect('signin')
-        except IntegrityError:
-            messages.error(request, 'Username already exists')
-            return redirect('signup')
+        #print(username, email, password, cpassword)
     return render(request,'signup.html')
 
 
 def signin(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password) or None
+    if request.method=='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user=authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
-            return render(request,"index.html", )
-        else:
-            messages.error(request,"Username or Password does not match")
+            login(request,user)
             return redirect('home')
-    
+        else: 
+            return HttpResponse("Username or Password is incorrect !!!")
     return render(request,'signin.html')
 
 
-
-
 def signout(request):
-    logout(request)
-    return redirect('home')
+    index(request)
+    return redirect(request,'index.html')

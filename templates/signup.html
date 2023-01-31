@@ -5,8 +5,8 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Sign Up to Cloud Trade</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <link rel='stylesheet' type='text/css' media='screen' href=''>
+    <script src=''></script>
 </head>
 <body>
     <style>
@@ -45,7 +45,7 @@
           background-color: #8eff80;
         }
 
-        input[type="cpassword"]:hover{
+        input[type="password"]:hover{
           background-color: #8eff80;
         }
 
@@ -71,16 +71,16 @@
         {% csrf_token %}
           <h1> <center>Sign Up</center></h1>
           <label for="username">Username:</label>
-          <input type="text" id="username" name="username">
+          <input type="text" placeholder="Enter Your Username" id="username" name="username">
   
           <label for="email">Email:</label>
-          <input type="email" id="email" name="email">
+          <input type="email" placeholder="Enter Your Email id" id="email" name="email">
 
           <label for="password">Password:</label>
-          <input type="password" id="password" name="password">
+          <input type="password" placeholder="Enter Your Password" id="password" name="password">
 
           <label for="cpassword">Confirm Password:</label>
-          <input type="cpassword" id="cpassword" name="cpassword">
+          <input type="password" placeholder="Re-Enter the Password " id="cpassword" name="cpassword"> 
 
           <p>Already Have an account? <a href="signin.html">Sign In</a></p>
           
