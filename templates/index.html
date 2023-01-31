@@ -1,3 +1,4 @@
+{% load static %}
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,8 +63,7 @@
     </style>
   </head>
   <body>
-    {% csrf_token %}
-    <img src="{'cloudtrade/logo.png'}" alt="Image">
+    <img src="{% static 'admin\img\logo.png'%}" alt="Image">
 
     <h1>Welcome to Cloud Trade</h1>
     <a href="signup.html" class="btnone">Sign-Up</a>
