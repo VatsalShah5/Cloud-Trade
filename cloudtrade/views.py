@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='signin')
+@login_required(login_url='signup')
 def home(request):
     return render(request,'home.html')
 
@@ -20,8 +21,10 @@ def signup(request):
         
         if password != cpassword:
             return HttpResponse("Your Password Does not match!!!")
+        elif User.objects.filter(username=username).exists():
+                return HttpResponse("Username already taken!!")
         else:    
-            my_user=User.objects.create_user(username, email, password)
+            my_user=User.objects.create_user(username=username, email=email, password=password)
             my_user.save()
             return redirect('signin')
         #print(username, email, password, cpassword)
