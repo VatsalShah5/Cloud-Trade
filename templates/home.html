@@ -1,12 +1,16 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
-  </head>
-  <body>
-    <h1>Welcome To Home page of Cloudtrade</h1>
-    <a href="{% url 'index' %}"class="btn btn-primary">Logout</a>
-  </body>
+{% load static %}
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'admin/css/home.css' %}">
+<body>
+
+<div class="navbar">
+  <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
+  <a href="#"><i class="fa fa-fw fa-search"></i> Search</a> 
+  <a href="#"><i class="fa fa-fw fa-envelope"></i> Contact</a> 
+  <a href="{% url 'signin' %}"><i class="fa fa-fw fa-user"></i> Login</a>
+</div>
+
+</body>
 </html>
