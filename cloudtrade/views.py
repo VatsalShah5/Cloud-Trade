@@ -47,3 +47,6 @@ def signin(request):
 def signout(request):
     index(request)
     return redirect(request,'index.html')
+
+def contact_us(request):
+    return render(request,'contactus.html')
