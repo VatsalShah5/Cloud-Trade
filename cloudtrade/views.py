@@ -49,4 +49,4 @@ def signout(request):
     return redirect(request,'index.html')
 
 def contact_us(request):
-    return render(request,'contactus.html')
+    return render(request,'contact_us.html')
