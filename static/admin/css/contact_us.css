@@ -33,7 +33,6 @@ textarea{
     border: 1px solid rgb(255, 255, 255);
     border-color: rgb(0, 0, 0);
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
     overflow: hidden;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -45,9 +44,10 @@ textarea{
     height: 500px;
     width: 100%;
     max-width: 820px;
+
 }
 
-.contact-form:before{
+.contact-form::before{
     content: "";
     position: absolute;
     width: 26px;
@@ -56,4 +56,5 @@ textarea{
     transform: rotate(45deg);
     top: 270px;
     left: 947px;
+    z-index: -1;
 }
