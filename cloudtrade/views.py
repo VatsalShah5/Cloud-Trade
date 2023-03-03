@@ -2,6 +2,7 @@ from django.shortcuts import render , redirect , HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
+from yahoo_fin.stock_info import *
 
 @login_required(login_url='signin')
 @login_required(login_url='signup')
@@ -50,3 +51,25 @@ def signout(request):
 
 def contact_us(request):
     return render(request,'contact_us.html')
+
+def stockpicker(request):
+        stock_picker = tickers_nifty50()
+        print(stock_picker)
+        return render(request,'stockpicker.html',{'stockpicker':stock_picker})
+
+def stocktracker(request):
+        stockpicker = request.GET.getlist('stock_picker')
+        print(stockpicker)
+        data = ()
+        available_stocks = tickers_nifty50()
+        for i in stockpicker:
+            if i in available_stocks:
+                pass
+            else: 
+                return HttpResponse("Stock not Present!!")
+        for i in stockpicker:
+            detail = get_quote_table(i)
+            data.update(detail)
+            
+        print(data)
+        return render(request,'stocktracker.html')

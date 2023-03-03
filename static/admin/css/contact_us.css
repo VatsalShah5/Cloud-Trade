@@ -35,8 +35,8 @@
 .contact .content p 
 {
     min-width: 50px;
-    font-weight: 300;
-    color: black;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
 }
 
 .container
