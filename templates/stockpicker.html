@@ -14,9 +14,10 @@
 </div>
 <div class="container">
   <h1>Select your Stocks.</h1>
-  <form action="/stocktracker">
+  <form action="/stocktracker/" method="POST">
+    {% csrf_token %}
       <label for="stockpicker">List of the Stocks:</label>
-      <select class="form-select" multiple aria-label="multiple select example">
+      <select name="stock_picked" class="form-select" multiple aria-label="multiple select example">
         {%for i in stockpicker %}
         <option value="{{i}}">{{i}}</option>
         {% endfor %}
