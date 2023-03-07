@@ -69,7 +69,7 @@ def stocktracker(request):
     if request.method == "POST":
         stockpicker = request.POST.getlist('stock_picked')
         print(stockpicker)
-        data = []
+        data = {}
         available_stocks = tickers_nifty50()
         for i in stockpicker:
             if i in available_stocks:
@@ -91,11 +91,10 @@ def stocktracker(request):
 
         while not que.empty():
             result = que.get()
-            data.append(result)
+            data.update(result)
         end = time.time()
         time_taken = end - start
         print(time_taken)
 
         print(data)
         return render(request, 'stocktracker.html', {'data': data})
-    return HttpResponse("Invalid request")
